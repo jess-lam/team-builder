@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PersonForm from './Form';
+import Person from './Person';
 
 function App() {
-  const [person, setPerson] = useState([
+  const [people, setPeople] = useState([
     {
-      id: "",
-      name: "",
-      email: "",
-      role: ""
+      id: 1,
+      name: "Billy",
+      email: "billy.bob@gmail.com",
+      role: "mechanical engineer"
     }
-  ])
+  ]);
+
+  const addNewPerson = person => {
+    const newPerson = {
+      id: Date.now(),
+      name: person.name,
+      email: person.email,
+      role: person.role
+    }
+    setPeople([...people, newPerson])
+  }
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <PersonForm addNewPerson={addNewPerson}/>
+        <Person person={people}/>
       </header>
     </div>
   );
